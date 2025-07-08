@@ -588,7 +588,7 @@ config_set_t *oplGetLegacyAppsConfig(void)
     config_set_t *appConfig;
     char appsPath[128];
 
-    snprintf(appsPath, sizeof(appsPath), "mc?:OPL/conf_apps.cfg");
+    snprintf(appsPath, sizeof(appsPath), "mc?:OPL-S348/conf_apps.cfg");
     fd = openFile(appsPath, O_RDONLY);
     if (fd >= 0) {
         appConfig = configAlloc(CONFIG_APPS, NULL, appsPath);
@@ -1670,7 +1670,7 @@ static void setDefaults(void)
     gAutoLaunchDeviceData = NULL;
     gOPLPart[0] = '\0';
     gHDDPrefix = "pfs0:";
-    gBaseMCDir = "mc?:OPL";
+    gBaseMCDir = "mc?:OPL-S348";
 
     bdmCacheSize = 16;
     hddCacheSize = 8;

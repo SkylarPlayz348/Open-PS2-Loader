@@ -63,14 +63,14 @@ static int checkMC()
         }
 
         mc0_has_folder = 0;
-        DIR *mc0_opl_dir = opendir("mc0:OPL/");
+        DIR *mc0_opl_dir = opendir("mc0:OPL-S348/");
         if (mc0_opl_dir != NULL) {
             closedir(mc0_opl_dir);
             mc0_has_folder = 1;
         }
 
         mc1_has_folder = 0;
-        DIR *mc1_opl_dir = opendir("mc1:OPL/");
+        DIR *mc1_opl_dir = opendir("mc1:OPL-S348/");
         if (mc1_opl_dir != NULL) {
             closedir(mc1_opl_dir);
             mc1_has_folder = 1;
@@ -108,10 +108,10 @@ void checkMCFolder(void)
         return;
     }
 
-    snprintf(path, sizeof(path), "mc%d:OPL/", mcID & 1);
+    snprintf(path, sizeof(path), "mc%d:OPL-S348/", mcID & 1);
     mkdir(path, 0777);
 
-    snprintf(path, sizeof(path), "mc%d:OPL/opl.icn", mcID & 1);
+    snprintf(path, sizeof(path), "mc%d:OPL-S348/opl.icn", mcID & 1);
     fd = open(path, O_RDONLY);
     if (fd < 0) {
         fd = openFile(path, O_WRONLY | O_CREAT | O_TRUNC);
@@ -123,7 +123,7 @@ void checkMCFolder(void)
         close(fd);
     }
 
-    snprintf(path, sizeof(path), "mc%d:OPL/icon.sys", mcID & 1);
+    snprintf(path, sizeof(path), "mc%d:OPL-S348/icon.sys", mcID & 1);
     fd = open(path, O_RDONLY);
     if (fd < 0) {
         fd = openFile(path, O_WRONLY | O_CREAT | O_TRUNC);
