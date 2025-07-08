@@ -4,10 +4,10 @@ Copyright 2013, Ifcaro & jimmikaelkael
 Licensed under Academic Free License version 3.0
 Review the LICENSE file for further details.
 
-[![CI](https://github.com/ps2homebrew/Open-PS2-Loader/actions/workflows/compilation.yml/badge.svg?branch=master)](https://github.com/ps2homebrew/Open-PS2-Loader/actions/workflows/compilation.yml)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/99032a6a180243bfa0d0e23efeb0608d)](https://www.codacy.com/gh/ps2homebrew/Open-PS2-Loader/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ps2homebrew/Open-PS2-Loader&amp;utm_campaign=Badge_Grade)
-[![Discord](https://img.shields.io/discord/652861436992946216?style=flat&logo=Discord)](https://discord.gg/CVFUa9xh6B)
-[![Mega](https://img.shields.io/badge/Mega-%23D90007.svg?style=flat&logo=Mega&logoColor=white)](https://mega.nz/folder/Ndwi1bAK#oLWNhH_g-h0p4BoT4c556A)
+[![CI](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml/badge.svg?branch=master)](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml)
+
+
+### I am porting features from Jay-Jays OPL to OPL 1.2.0 Beta and because of some underlying changes I am resetting the version counter to `0.0.0` with the first release being `0.0.1`
 
 ## Introduction
 
@@ -56,16 +56,16 @@ types come with more or fewer features included.
 OPL uses the following directory tree structure across HDD, SMB, and
 USB modes:
 
-| Folder | Description                                          | Modes       |
-| ------ | ---------------------------------------------------- | ----------- |
-| `CD`   | for games on CD media - i.e. blue-bottom discs       | USB and SMB |
+| Folder | Description                                                  | Modes       |
+| ------ | ------------------------------------------------------------ | ----------- |
+| `CD`   | for games on CD media - i.e. blue-bottom discs               | USB and SMB |
 | `DVD`  | for DVD5 and DVD9 images (if filesystem supports +4gb files) | USB and SMB |
-| `VMC`  | for Virtual Memory Card images - from 8MB up to 64MB | all         |
-| `CFG`  | for saving per-game configuration files              | all         |
-| `ART`  | for game art images                                  | all         |
-| `THM`  | for themes support                                   | all         |
-| `LNG`  | for translation support                              | all         |
-| `CHT`  | for cheats files                                     | all         |
+| `VMC`  | for Virtual Memory Card images - from 8MB up to 64MB         | all         |
+| `CFG`  | for saving per-game configuration files                      | all         |
+| `ART`  | for game art images                                          | all         |
+| `THM`  | for themes support                                           | all         |
+| `LNG`  | for translation support                                      | all         |
+| `CHT`  | for cheats files                                             | all         |
 
 OPL will automatically create the above directory structure the first time you launch it and enable your favorite device.
 
@@ -125,10 +125,10 @@ You can activate cheats via OPL's graphical interface. Navigate to a games setti
 
 ### cheat modes
 
-  * Auto Select Cheats:  
+  * Auto Select Cheats:
 This mode will enable and apply all cheat codes in your `.cht` file to your game automatically.
 
-  * Select Game Cheats:  
+  * Select Game Cheats:
 When enabled a cheat selection menu will appear when you launch a game. You can navigate the menu and disable undesired cheats for this launch session. `Mastercode`s cannot be disabled as they are required for any other cheats to be applied.
 
 </p>
