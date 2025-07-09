@@ -20,6 +20,7 @@ extern void *hdd_bd_png;
 extern void *hdd_png;
 extern void *eth_png;
 extern void *app_png;
+extern void *elm_png;
 extern void *Index_0_png;
 extern void *Index_1_png;
 extern void *Index_2_png;
@@ -45,6 +46,7 @@ extern void *R2_png;
 extern void *R3_png; */
 
 extern void *background_png;
+extern void *background2_png;
 extern void *info_png;
 extern void *cover_png;
 extern void *disc_png;
@@ -143,6 +145,7 @@ static texture_t internalDefault[TEXTURES_COUNT] = {
     {HDD_ICON, "hdd", &hdd_png},
     {ETH_ICON, "eth", &eth_png},
     {APP_ICON, "app", &app_png},
+    {ELM_ICON, "elm", &elm_png},
     {INDEX_0, "Index_0", &Index_0_png},
     {INDEX_1, "Index_1", &Index_1_png},
     {INDEX_2, "Index_2", &Index_2_png},
@@ -166,6 +169,7 @@ static texture_t internalDefault[TEXTURES_COUNT] = {
     {R2_ICON, "R2", &R2_png},
     {R3_ICON, "R3", &R3_png}, */
     {MAIN_BG, "background", &background_png},
+    {MAIN2_BG, "background2", &background2_png},
     {INFO_BG, "info", &info_png},
     {COVER_DEFAULT, "cover", &cover_png},
     {DISC_DEFAULT, "disc", &disc_png},

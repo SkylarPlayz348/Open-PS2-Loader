@@ -30,6 +30,7 @@
 #include "include/ethsupport.h"
 #include "include/hddsupport.h"
 #include "include/appsupport.h"
+#include "include/elmsupport.h"
 
 #include "include/cheatman.h"
 #include "include/sound.h"
@@ -72,6 +73,9 @@ int configGetStat(config_set_t *configSet, iox_stat_t *stat);
 
 // App support stuff.
 static unsigned char shouldAppsUpdate;
+
+// ELM Support Stuff
+static unsigned char shouldElmUpdate;
 
 // Network support stuff.
 #define HTTP_IOBUF_SIZE 512
@@ -133,6 +137,7 @@ int gBDMStartMode;
 int gHDDStartMode;
 int gETHStartMode;
 int gAPPStartMode;
+int gELMStartMode;
 int bdmCacheSize;
 int hddCacheSize;
 int smbCacheSize;
@@ -427,6 +432,7 @@ static void initAllSupport(int force_reinit)
     initSupport(ethGetObject(0), ETH_MODE, force_reinit || (gNetworkStartup >= ERROR_ETH_SMB_CONN));
     initSupport(hddGetObject(0), HDD_MODE, force_reinit);
     initSupport(appGetObject(0), APP_MODE, force_reinit);
+    initSupport(elmGetObject(0), ELM_MODE, force_reinit);
 }
 
 static void deinitAllSupport(int exception, int modeSelected)
@@ -581,6 +587,16 @@ int oplShouldAppsUpdate(void)
     return result;
 }
 
+int oplShouldElmUpdate(void)
+{
+    int result;
+
+    result = (int)shouldElmUpdate;
+    shouldElmUpdate = 0;
+
+    return result;
+}
+
 config_set_t *oplGetLegacyAppsConfig(void)
 {
     int i, fd;
@@ -713,6 +729,8 @@ void menuDeferredUpdate(void *data)
         // If other modes have been updated, then the apps list should be updated too.
         if (mod->support->mode != APP_MODE)
             shouldAppsUpdate = 1;
+        if (*mode != ELM_MODE)
+            shouldElmUpdate = 1;
     }
 }
 
@@ -936,6 +954,7 @@ static void _loadConfig()
             configGetInt(configOPL, CONFIG_OPL_HDD_MODE, &gHDDStartMode);
             configGetInt(configOPL, CONFIG_OPL_ETH_MODE, &gETHStartMode);
             configGetInt(configOPL, CONFIG_OPL_APP_MODE, &gAPPStartMode);
+            configGetInt(configOPL, CONFIG_OPL_ELM_MODE, &gELMStartMode);
             configGetInt(configOPL, CONFIG_OPL_ENABLE_ILINK, &gEnableILK);
             configGetInt(configOPL, CONFIG_OPL_ENABLE_MX4SIO, &gEnableMX4SIO);
             configGetInt(configOPL, CONFIG_OPL_ENABLE_BDMHDD, &gEnableBdmHDD);
@@ -1093,6 +1112,7 @@ static void _saveConfig()
         configSetInt(configOPL, CONFIG_OPL_HDD_MODE, gHDDStartMode);
         configSetInt(configOPL, CONFIG_OPL_ETH_MODE, gETHStartMode);
         configSetInt(configOPL, CONFIG_OPL_APP_MODE, gAPPStartMode);
+        configSetInt(configOPL, CONFIG_OPL_ELM_MODE, gELMStartMode);
         configSetInt(configOPL, CONFIG_OPL_BDM_CACHE, bdmCacheSize);
         configSetInt(configOPL, CONFIG_OPL_HDD_CACHE, hddCacheSize);
         configSetInt(configOPL, CONFIG_OPL_SMB_CACHE, smbCacheSize);
@@ -1150,7 +1170,7 @@ static void _saveConfig()
 
 void applyConfig(int themeID, int langID, int skipDeviceRefresh)
 {
-    if (gDefaultDevice < 0 || gDefaultDevice > APP_MODE)
+    if (gDefaultDevice < 0 || gDefaultDevice > MODE_COUNT - 1)
         gDefaultDevice = APP_MODE;
 
     guiUpdateScrollSpeed();
@@ -1737,6 +1757,9 @@ static void setDefaults(void)
     gHDDStartMode = START_MODE_DISABLED;
     gETHStartMode = START_MODE_DISABLED;
     gAPPStartMode = START_MODE_DISABLED;
+    gELMStartMode = START_MODE_DISABLED;
+
+
 
     gEnableILK = 0;
     gEnableMX4SIO = 0;

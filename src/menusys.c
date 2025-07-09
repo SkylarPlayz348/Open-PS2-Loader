@@ -918,7 +918,7 @@ void menuHandleInputMenu()
 
     if (getKeyOn(KEY_START) || getKeyOn(gSelectButton == KEY_CIRCLE ? KEY_CROSS : KEY_CIRCLE)) {
         // Check if there is anything to show the user, at all.
-        if (gAPPStartMode || gETHStartMode || gBDMStartMode || gHDDStartMode) {
+        if (gAPPStartMode || gELMStartMode || gETHStartMode || gBDMStartMode || gHDDStartMode) {
             guiSwitchScreen(GUI_SCREEN_MAIN);
             refreshMenuPosition();
         }
@@ -945,7 +945,7 @@ void menuRenderMain(void)
 {
     item_list_t *list = selected_item->item->userdata;
 
-    if (list->mode == APP_MODE) {
+    if (list->mode == APP_MODE || ELM_MODE) {
         menuRenderElements(gTheme->appsMainElems.first);
         gTheme->itemsList = gTheme->appsItemsList;
     } else {
@@ -1002,7 +1002,7 @@ void menuRenderInfo(void)
 {
     item_list_t *list = selected_item->item->userdata;
 
-    if (list->mode == APP_MODE) {
+    if (list->mode == APP_MODE || ELM_MODE) {
         menuRenderElements(gTheme->appsInfoElems.first);
         gTheme->itemsList = gTheme->appsItemsList;
     } else {

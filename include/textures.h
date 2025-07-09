@@ -18,6 +18,7 @@ enum INTERNAL_TEXTURE {
     HDD_ICON,
     ETH_ICON,
     APP_ICON,
+    ELM_ICON,
     INDEX_0,
     INDEX_1,
     INDEX_2,
@@ -41,6 +42,7 @@ enum INTERNAL_TEXTURE {
     R2_ICON,
     R3_ICON, */
     MAIN_BG,
+    MAIN2_BG,
     INFO_BG,
     COVER_DEFAULT,
     DISC_DEFAULT,

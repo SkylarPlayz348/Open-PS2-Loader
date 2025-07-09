@@ -461,10 +461,11 @@ static int appGetImage(item_list_t *itemList, char *folder, int isRelative, char
 
     startup = appGetBoot(device, sizeof(device), value);
 
-    if (!strcmp(folder, "ART"))
-        return oplGetAppImage(device, folder, isRelative, startup, suffix, resultTex, psm);
-    else
-        return oplGetAppImage(device, folder, isRelative, value, suffix, resultTex, psm);
+    if (oplGetAppImage(device, folder, isRelative, value, suffix, resultTex, psm) >= 0) {
+        return 0;
+    }
+
+    return oplGetAppImage(device, folder, isRelative, startup, suffix, resultTex, psm);
 }
 
 static int appGetTextId(item_list_t *itemList)

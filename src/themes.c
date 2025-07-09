@@ -417,6 +417,10 @@ static image_texture_t *initImageTexture(const char *themePath, config_set_t *th
 static image_texture_t *initImageInternalTexture(config_set_t *themeConfig, const char *name)
 {
     image_texture_t *texture = (image_texture_t *)malloc(sizeof(image_texture_t));
+    int length = strlen(name) + 1;
+    texture->name = (char *)malloc(length * sizeof(char));
+    memcpy(texture->name, name, length);
+
     texture->name = NULL;
     int result;
 
@@ -493,6 +497,8 @@ static mutable_image_t *initMutableImage(const char *themePath, config_set_t *th
     findDuplicate(theme->infoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->appsMainElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->appsInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+    findDuplicate(theme->elmMainElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+    findDuplicate(theme->elmInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
 
     if (cachePattern && !mutableImage->cache) {
         if (type == ELEM_TYPE_ATTRIBUTE_IMAGE)
@@ -1001,10 +1007,12 @@ static void validateGUIElems(const char *themePath, config_set_t *themeConfig, t
     // 1. check we have a valid Background elements
     validateBackgroundElems(themePath, themeConfig, theme, &theme->mainElems, &theme->infoElems);
     validateBackgroundElems(themePath, themeConfig, theme, &theme->appsMainElems, &theme->appsInfoElems);
+    validateBackgroundElems(themePath, themeConfig, theme, &theme->elmMainElems, &theme->elmInfoElems);
 
     // 2. check we have a valid ItemsList element, and link its decorator to the target element
     validateItemsList(themePath, themeConfig, theme, theme->gamesItemsList, &theme->mainElems);
     validateItemsList(themePath, themeConfig, theme, theme->appsItemsList, &theme->appsMainElems);
+    validateItemsList(themePath, themeConfig, theme, theme->elmItemsList, &theme->elmMainElems);
 }
 
 static int addGUIElem(const char *themePath, config_set_t *themeConfig, theme_t *theme, theme_elems_t *elems, const char *type, const char *name)
@@ -1058,6 +1066,10 @@ static int addGUIElem(const char *themePath, config_set_t *themeConfig, theme_t 
                     elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_ITEMS_LIST, 42, 42, ALIGN_NONE, 400, 360, SCALING_RATIO, theme->textColor, theme->fonts[0]);
                     initItemsList(themePath, themeConfig, theme, elem, name, NULL);
                     theme->appsItemsList = elem;
+                } else if (!theme->elmItemsList) {
+                    elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_ITEMS_LIST, 150, MENU_POS_V, ALIGN_NONE, DIM_UNDEF, DIM_UNDEF, SCALING_RATIO, theme->textColor, theme->fonts[0]);
+                    initItemsList(themePath, themeConfig, theme, elem, name, NULL);
+                    theme->elmItemsList = elem;
                 }
             } else if (!strcmp(elementsType[ELEM_TYPE_ITEM_ICON], type)) {
                 elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_GAME_IMAGE, 0, 0, ALIGN_CENTER, 64, 64, SCALING_RATIO, gDefaultCol, theme->fonts[0]);
@@ -1262,6 +1274,12 @@ static void thmLoad(const char *themePath)
     newT->appsMainElems.last = NULL;
     newT->appsInfoElems.first = NULL;
     newT->appsInfoElems.last = NULL;
+    newT->elmMainElems.first = NULL;
+    newT->elmMainElems.last = NULL;
+    newT->elmInfoElems.first = NULL;
+    newT->elmInfoElems.last = NULL;
+    newT->inElmPage = 0;
+    newT->elmItemsList = NULL;
     newT->gameCacheCount = 0;
     newT->itemsList = NULL;
     newT->gamesItemsList = NULL;
@@ -1337,6 +1355,19 @@ static void thmLoad(const char *themePath)
             addGUIElem(themePath, themeConfig, newT, &newT->appsInfoElems, NULL, path);
         }
     }
+
+    i = 1;
+    snprintf(path, sizeof(path), "mainELM0");
+    while (addGUIElem(themePath, themeConfig, newT, &newT->elmMainElems, NULL, path))
+        snprintf(path, sizeof(path), "mainELM%d", i++);
+
+    //Special Info ELM page
+    i = 1;
+    snprintf(path, sizeof(path), "infoELM0");
+    while (addGUIElem(themePath, themeConfig, newT, &newT->elmInfoElems, NULL, path))
+        snprintf(path, sizeof(path), "infoELM%d", i++);
+
+    validateGUIElems(themePath, themeConfig, newT);
 
     if (themePath)
         validateGUIElems(themePath, themeConfig, newT);

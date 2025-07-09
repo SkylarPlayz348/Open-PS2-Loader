@@ -304,6 +304,8 @@ void hddLoadSupportModules(void)
             return;
         }
 
+        ret = sysLoadModuleBuffer(&ps2fs_irx, size_ps2fs_irx, sizeof(pfsarg), pfsarg);
+
         LOG("[PS2FS]:\n");
         ret = sysLoadModuleBuffer(&ps2fs_irx, size_ps2fs_irx, sizeof(pfsarg), pfsarg);
         if (ret < 0) {

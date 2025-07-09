@@ -478,8 +478,10 @@ int guiDeviceTypeToIoMode(int deviceType)
         return ETH_MODE;
     else if (deviceType == 2)
         return HDD_MODE;
-    else
+    else if (deviceType == 3)
         return APP_MODE;
+    else
+        return ELM_MODE;
 }
 
 int guiIoModeToDeviceType(int ioMode)
@@ -497,6 +499,8 @@ int guiIoModeToDeviceType(int ioMode)
             return 2;
         case APP_MODE:
             return 3;
+        case ELM_MODE:
+            return 4;
         default:
             return 0;
     }
@@ -513,6 +517,7 @@ void guiShowConfig()
     diaSetEnum(diaConfig, CFG_HDDMODE, deviceModes);
     diaSetEnum(diaConfig, CFG_ETHMODE, deviceModes);
     diaSetEnum(diaConfig, CFG_APPMODE, deviceModes);
+    diaSetEnum(diaConfig, CFG_ELMMODE, deviceModes);
 
     diaSetInt(diaConfig, CFG_BDMCACHE, bdmCacheSize);
     diaSetInt(diaConfig, CFG_HDDCACHE, hddCacheSize);
@@ -539,6 +544,7 @@ void guiShowConfig()
     diaSetInt(diaConfig, CFG_HDDMODE, gHDDStartMode);
     diaSetInt(diaConfig, CFG_ETHMODE, gETHStartMode);
     diaSetInt(diaConfig, CFG_APPMODE, gAPPStartMode);
+    diaSetInt(diaConfig, CFG_ELMMODE, gELMStartMode);
 
     int ret = diaExecuteDialog(diaConfig, -1, 1, &guiUpdater);
     if (ret) {
@@ -558,6 +564,7 @@ void guiShowConfig()
         diaGetInt(diaConfig, CFG_HDDMODE, &gHDDStartMode);
         diaGetInt(diaConfig, CFG_ETHMODE, &gETHStartMode);
         diaGetInt(diaConfig, CFG_APPMODE, &gAPPStartMode);
+        diaGetInt(diaConfig, CFG_ELMMODE, &gELMStartMode);
         diaGetInt(diaConfig, CFG_BDMCACHE, &bdmCacheSize);
         diaGetInt(diaConfig, CFG_HDDCACHE, &hddCacheSize);
         diaGetInt(diaConfig, CFG_SMBCACHE, &smbCacheSize);

@@ -68,6 +68,7 @@ int oplScanApps(int (*callback)(const char *path, config_set_t *appConfig, void 
 int oplShouldAppsUpdate(void);
 config_set_t *oplGetLegacyAppsConfig(void);
 config_set_t *oplGetLegacyAppsInfo(char *name);
+int oplShouldElmUpdate(void);
 
 void setErrorMessage(int strId);
 void setErrorMessageWithCode(int strId, int error);
@@ -119,6 +120,7 @@ extern int gBDMStartMode;
 extern int gHDDStartMode;
 extern int gETHStartMode;
 extern int gAPPStartMode;
+extern int gELMStartMode;
 extern int bdmCacheSize;
 extern int hddCacheSize;
 extern int smbCacheSize;

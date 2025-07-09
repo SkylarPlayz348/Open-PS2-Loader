@@ -110,6 +110,12 @@ typedef struct theme
 
     theme_elems_t mainElems;
     theme_elems_t infoElems;
+
+    theme_elems_t elmMainElems;
+    theme_elems_t elmInfoElems;
+    int inElmPage;
+    theme_element_t *elmItemsList;
+
     theme_element_t *gamesItemsList;
 
     theme_elems_t appsMainElems;
