@@ -147,6 +147,13 @@ void bdmInit(item_list_t *itemList)
     itemList->enabled = 1;
 }
 
+item_list_t *bdmGetObject(int initOnly)
+{
+    if (initOnly && !bdmGameList.enabled)
+        return NULL;
+    return &bdmGameList;
+}
+
 static int bdmNeedsUpdate(item_list_t *itemList)
 {
     char path[256];
