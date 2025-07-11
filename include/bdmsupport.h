@@ -43,7 +43,7 @@ typedef struct
 } bdm_device_data_t;
 
 void bdmInit(item_list_t *itemList);
-item_list_t bdmGetObject(int InitOnly);
+item_list_t *bdmGetObject(int InitOnly);
 int bdmFindPartition(char *target, const char *name, int write);
 void bdmLoadModules(void);
 void bdmLaunchGame(item_list_t *itemList, int id, config_set_t *configSet);
