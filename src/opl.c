@@ -407,7 +407,7 @@ void initSupport(item_list_t *itemList, int mode, int force_reinit)
     else if (mode == APP_MODE)
         startMode = gAPPStartMode;
     else if (mode == ELM_MODE)
-        startMode == gELMStartMode;
+        startMode = gELMStartMode;
 
     if (startMode) {
         if (!mod->support) {
