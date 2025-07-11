@@ -500,8 +500,8 @@ static mutable_image_t *initMutableImage(const char *themePath, config_set_t *th
     findDuplicate(theme->infoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->appsMainElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->appsInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
-    findDuplicate(theme->elmMainElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
-    findDuplicate(theme->elmInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+    findDuplicate(theme->mainElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+    findDuplicate(theme->infoElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
 
     findDuplicate(theme->mainElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->infoElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
@@ -1013,12 +1013,12 @@ static void validateGUIElems(const char *themePath, config_set_t *themeConfig, t
     // 1. check we have a valid Background elements
     validateBackgroundElems(themePath, themeConfig, theme, &theme->mainElems, &theme->infoElems);
     validateBackgroundElems(themePath, themeConfig, theme, &theme->appsMainElems, &theme->appsInfoElems);
-    validateBackgroundElems(themePath, themeConfig, theme, &theme->elmMainElems, &theme->elmInfoElems);
+    validateBackgroundElems(themePath, themeConfig, theme, &theme->mainElemsELM, &theme->infoElemsELM);
 
     // 2. check we have a valid ItemsList element, and link its decorator to the target element
     validateItemsList(themePath, themeConfig, theme, theme->gamesItemsList, &theme->mainElems);
     validateItemsList(themePath, themeConfig, theme, theme->appsItemsList, &theme->appsMainElems);
-    validateItemsList(themePath, themeConfig, theme, theme->elmItemsList, &theme->elmMainElems);
+    validateItemsList(themePath, themeConfig, theme, theme->itemsListELM, &theme->mainElemsELM);
 }
 
 static int addGUIElem(const char *themePath, config_set_t *themeConfig, theme_t *theme, theme_elems_t *elems, const char *type, const char *name)
@@ -1072,10 +1072,10 @@ static int addGUIElem(const char *themePath, config_set_t *themeConfig, theme_t 
                     elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_ITEMS_LIST, 42, 42, ALIGN_NONE, 400, 360, SCALING_RATIO, theme->textColor, theme->fonts[0]);
                     initItemsList(themePath, themeConfig, theme, elem, name, NULL);
                     theme->appsItemsList = elem;
-                } else if (!theme->elmItemsList) {
+                } else if (!theme->itemsListELM) {
                     elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_ITEMS_LIST, 150, MENU_POS_V, ALIGN_NONE, DIM_UNDEF, DIM_UNDEF, SCALING_RATIO, theme->textColor, theme->fonts[0]);
                     initItemsList(themePath, themeConfig, theme, elem, name, NULL);
-                    theme->elmItemsList = elem;
+                    theme->itemsListELM = elem;
                 }
             } else if (!strcmp(elementsType[ELEM_TYPE_ITEM_ICON], type)) {
                 elem = initBasic(themePath, themeConfig, theme, name, ELEM_TYPE_GAME_IMAGE, 0, 0, ALIGN_CENTER, 64, 64, SCALING_RATIO, gDefaultCol, theme->fonts[0]);
@@ -1280,12 +1280,12 @@ static void thmLoad(const char *themePath)
     newT->appsMainElems.last = NULL;
     newT->appsInfoElems.first = NULL;
     newT->appsInfoElems.last = NULL;
-    newT->elmMainElems.first = NULL;
-    newT->elmMainElems.last = NULL;
-    newT->elmInfoElems.first = NULL;
-    newT->elmInfoElems.last = NULL;
+    newT->mainElemsELM.first = NULL;
+    newT->mainElemsELM.last = NULL;
+    newT->infoElemsELM.first = NULL;
+    newT->infoElemsELM.last = NULL;
     newT->inElmPage = 0;
-    newT->elmItemsList = NULL;
+    newT->itemsListELM = NULL;
     newT->gameCacheCount = 0;
     newT->itemsList = NULL;
     newT->gamesItemsList = NULL;
@@ -1364,13 +1364,13 @@ static void thmLoad(const char *themePath)
 
     i = 1;
     snprintf(path, sizeof(path), "mainELM0");
-    while (addGUIElem(themePath, themeConfig, newT, &newT->elmMainElems, NULL, path))
+    while (addGUIElem(themePath, themeConfig, newT, &newT->mainElemsELM, NULL, path))
         snprintf(path, sizeof(path), "mainELM%d", i++);
 
     // Special Info ELM page
     i = 1;
     snprintf(path, sizeof(path), "infoELM0");
-    while (addGUIElem(themePath, themeConfig, newT, &newT->elmInfoElems, NULL, path))
+    while (addGUIElem(themePath, themeConfig, newT, &newT->infoElemsELM, NULL, path))
         snprintf(path, sizeof(path), "infoELM%d", i++);
 
     validateGUIElems(themePath, themeConfig, newT);

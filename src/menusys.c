@@ -1308,7 +1308,7 @@ void menuRenderElmMenu()
     int sitem = 0;
 
     for (; it; count++, it = it->next) {
-        if (it = elmMenuCurrent)
+        if (it == elmMenuCurrent)
             sitem = count;
     }
 
