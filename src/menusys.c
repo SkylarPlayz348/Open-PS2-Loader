@@ -871,7 +871,7 @@ void menuHandleInputMenu()
             if (menuCheckParentalLock() == 0)
                 guiShowConfig();
         } else if (id == MENU_CACHE_SETTINGS) {
-            if(menuCheckParentalLock() == 0)
+            if (menuCheckParentalLock() == 0)
                 guiShowCacheConfig();
         } else if (id == MENU_GFX_SETTINGS) {
             if (menuCheckParentalLock() == 0)

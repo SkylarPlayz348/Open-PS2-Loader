@@ -158,7 +158,7 @@ struct UIItem diaBlockDevicesConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {"HDD (GPT/MBR)", -1}}},
     {UI_SPACER},
     {UI_BOOL, CFG_ENABLEBDMHDD, 1, 1, _STR_HDD_HINT, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -205,6 +205,7 @@ struct UIItem diaConfig[] = {
     {UI_LABEL, CFG_LBL_AUTOSTARTLAST, 1, 1, -1, 0, 0, {.label = {NULL, _STR_AUTOSTARTLAST}}},
     {UI_SPACER},
     {UI_INT, CFG_AUTOSTARTLAST, 1, 1, _STR_HINT_AUTOSTARTLAST, 0, 0, {.intvalue = {0, 0, 0, 9}}},
+    {UI_BREAK},
     {UI_SPLITTER},
 
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_BDM_PREFIX}}},
@@ -220,6 +221,7 @@ struct UIItem diaConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_HDD_SPINDOWN}}},
     {UI_SPACER},
     {UI_INT, CFG_HDDSPINDOWN, 1, 1, _STR_HINT_SPINDOWN, 0, 0, {.intvalue = {20, 20, 0, 20}}},
+    {UI_BREAK},
     {UI_SPLITTER},
 
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_BDMMODE}}},
@@ -252,7 +254,19 @@ struct UIItem diaConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_DEFDEVICE}}},
     {UI_SPACER},
     {UI_ENUM, CFG_DEFDEVICE, 1, 1, -1, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
+    {UI_SPLITTER},
+
+    // buttons
+    {UI_OK, 0, 1, 1, -1, 0, 0, {.label = {NULL, _STR_OK}}},
+    {UI_BREAK},
+
+    // end of dialog
+    {UI_TERMINATOR}};
+
+// Cache Settings Menu
+struct UIItem diaCacheConfig[] = {
+    {UI_LABEL, 0, 1, 1, -1. 0, 0, {.label = {NULL, _STR_CACHE_SETTINGS}}},
     {UI_SPLITTER},
 
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {"BDM Cache", -1}}},
@@ -267,12 +281,12 @@ struct UIItem diaConfig[] = {
     {UI_SPACER},
     {UI_INT, CFG_SMBCACHE, 1, 1, -1, 0, 0, {.intvalue = {16, 4, 0, 32, NULL}}},
     {UI_BREAK},
+    {UI_SPLITTER},
 
     // buttons
     {UI_OK, 0, 1, 1, -1, 0, 0, {.label = {NULL, _STR_OK}}},
     {UI_BREAK},
 
-    // end of dialog
     {UI_TERMINATOR}};
 
 // Display Settings Menu
@@ -354,7 +368,7 @@ struct UIItem diaUIConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_WIDE_SCREEN}}},
     {UI_SPACER},
     {UI_BOOL, UICFG_WIDESCREEN, 1, 1, -1, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -408,7 +422,7 @@ struct UIItem diaCompatConfig[] = {
     {UI_STRING, COMPAT_GAMEID, 1, 1, -1, 0, 0, {.stringvalue = {"", "", NULL}}},
     {UI_SPACER},
     {UI_BUTTON, COMPAT_LOADFROMDISC, 1, 1, -1, 0, 0, {.label = {NULL, _STR_LOAD_FROM_DISC}}},
-    /* {UI_SPLITTER}, */
+    {UI_SPLITTER},
     {UI_BREAK},
 
     {UI_LABEL, 0, 1, 1, -1, -30, 0, {.label = {NULL, _STR_ALTSTARTUP}}},
@@ -440,7 +454,7 @@ struct UIItem diaVMCConfig[] = {
     {UI_BUTTON, COMPAT_VMC2_DEFINE, 1, 1, -1, 0, 0, {.label = {NULL, -1}}},
     {UI_SPACER},
     {UI_BUTTON, COMPAT_VMC2_ACTION, 1, 1, -1, 0, 0, {.label = {NULL, -1}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -463,7 +477,7 @@ struct UIItem diaVMC[] = {
     {UI_LABEL, 0, 1, 1, -1, -20, 0, {.label = {NULL, _STR_SIZE}}},
     {UI_SPACER},
     {UI_ENUM, VMC_SIZE, 1, 1, _STR_HINT_VMC_SIZE, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
     /* {UI_BREAK}, */
 
@@ -476,7 +490,7 @@ struct UIItem diaVMC[] = {
     {UI_SPACER},
     {UI_INT, VMC_PROGRESS, 0, 1, -1, 0, 0, {.intvalue = {0, 0, 0, 100}}},
     {UI_LABEL, 0, 1, 1, -1, 0, 0, {.label = {"%", -1}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -517,7 +531,7 @@ struct UIItem diaGSConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_YOFFSET}}},
     {UI_SPACER},
     {UI_INT, GSMCFG_GSMYOFFSET, 1, 1, _STR_HINT_YOFFSET, -5, 0, {.intvalue = {0, 0, -100, 100}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_GSM_FIELD_FIX}}},
@@ -551,7 +565,7 @@ struct UIItem diaCheatConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_CHEATMODE}}},
     {UI_SPACER},
     {UI_ENUM, CHTCFG_CHEATMODE, 1, 1, _STR_HINT_CHEATMODE, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
     // buttons
     {UI_OK, 0, 1, 1, -1, 0, 0, {.label = {NULL, _STR_OK}}},
@@ -948,7 +962,7 @@ struct UIItem diaNetCompatUpdate[] = {
     {UI_SPACER},
     {UI_INT, NETUPD_PROGRESS, 0, 1, -1, 0, 0, {.intvalue = {0, 0, 0, 100}}},
     {UI_LABEL, NETUPD_PROGRESS_PERC_LBL, 1, 1, -1, 0, 0, {.label = {"%", -1}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -968,7 +982,7 @@ struct UIItem diaParentalLockConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_PARENLOCK_PASSWORD}}},
     {UI_SPACER},
     {UI_PASSWORD, CFG_PARENLOCK_PASSWORD, 1, 1, _STR_PARENLOCK_PASSWORD_HINT, 0, 0, {.stringvalue = {"", "", NULL}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
 
     // buttons
@@ -1037,7 +1051,7 @@ struct UIItem diaControllerConfig[] = {
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_SELECTBUTTON}}},
     {UI_SPACER},
     {UI_ENUM, CFG_SELECTBUTTON, 1, 1, -1, 0, 0, {.intvalue = {0, 0}}},
-    /* {UI_BREAK}, */
+    {UI_BREAK},
     {UI_SPLITTER},
     /* {UI_BREAK}, */
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {NULL, _STR_XSENSITIVITY}}},

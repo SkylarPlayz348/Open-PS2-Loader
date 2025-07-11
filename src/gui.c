@@ -519,10 +519,6 @@ void guiShowConfig()
     diaSetEnum(diaConfig, CFG_APPMODE, deviceModes);
     diaSetEnum(diaConfig, CFG_ELMMODE, deviceModes);
 
-    diaSetInt(diaConfig, CFG_BDMCACHE, bdmCacheSize);
-    diaSetInt(diaConfig, CFG_HDDCACHE, hddCacheSize);
-    diaSetInt(diaConfig, CFG_SMBCACHE, smbCacheSize);
-
     diaSetInt(diaConfig, CFG_DEBUG, gEnableDebug);
     diaSetInt(diaConfig, CFG_PS2LOGO, gPS2Logo);
     diaSetInt(diaConfig, CFG_HDDGAMELISTCACHE, gHDDGameListCache);
@@ -565,9 +561,6 @@ void guiShowConfig()
         diaGetInt(diaConfig, CFG_ETHMODE, &gETHStartMode);
         diaGetInt(diaConfig, CFG_APPMODE, &gAPPStartMode);
         diaGetInt(diaConfig, CFG_ELMMODE, &gELMStartMode);
-        diaGetInt(diaConfig, CFG_BDMCACHE, &bdmCacheSize);
-        diaGetInt(diaConfig, CFG_HDDCACHE, &hddCacheSize);
-        diaGetInt(diaConfig, CFG_SMBCACHE, &smbCacheSize);
 
         if (ret == BLOCKDEVICE_BUTTON)
             guiShowBlockDeviceConfig();
@@ -577,8 +570,28 @@ void guiShowConfig()
     }
 }
 
-void guiShowCacheConfig() {
+static int guiCacheUpdater(int modified)
+{
+    if (modified) {
+    }
+    return 1;
+}
 
+void guiShowCacheConfig()
+{
+    diaSetInt(diaCacheConfig, CFG_BDMCACHE, bdmCacheSize);
+    diaSetInt(diaCacheConfig, CFG_HDDCACHE, hddCacheSize);
+    diaSetInt(diaCacheConfig, CFG_SMBCACHE, smbCacheSize);
+
+    int ret = diaExecuteDialog(diaCacheConfig, -1, 1, guiCacheUpdater);
+    if (ret) {
+        diaGetInt(diaCacheConfig, CFG_BDMCACHE, &bdmCacheSize);
+        diaGetInt(diaCacheConfig, CFG_HDDCACHE, &hddCacheSize);
+        diaGetInt(diaCacheConfig, CFG_SMBCACHE, &smbCacheSize);
+
+        applyConfig(-1, -1, 0);
+        menuReinitMainMenu();
+    }
 }
 
 static int curTheme = -1;

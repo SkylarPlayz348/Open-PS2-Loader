@@ -212,6 +212,7 @@ extern struct UIItem diaPadEmuInfo[];
 #endif
 
 extern struct UIItem diaNetConfig[];
+extern struct UIItem diaCacheConfig[];
 extern struct UIItem diaUIConfig[];
 extern struct UIItem diaAudioConfig[];
 extern struct UIItem diaControllerConfig[];
