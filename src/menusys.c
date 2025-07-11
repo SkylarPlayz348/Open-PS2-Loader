@@ -76,7 +76,10 @@ static submenu_list_t *gameMenuCurrent;
 static submenu_list_t *appMenu;
 static submenu_list_t *appMenuCurrent;
 
-static s32 menuSemaId;
+static submenu_list_t *elmMenu;
+static subMenu_list_t *elmMenuCurrent
+
+    static s32 menuSemaId;
 static s32 menuListSemaId = -1;
 static ee_sema_t menuSema;
 
@@ -274,6 +277,17 @@ void menuInitAppMenu(void)
     appMenuCurrent = appMenu;
 }
 
+void menuInitElmMenu(void)
+{
+    if (elmMenu)
+        submenuDestroy(&elmMenu);
+
+    // initialize the menu
+    submenuAppendItem(&elmMenu, -1, NULL, 0, _STR_RENAME);
+    submenuAppendItem(&elmMenu, -1, NULL, 1, _STR_DELETE);
+
+    elmMenuCurrent = elmMenu;
+}
 // -------------------------------------------------------------------------------------------
 // ---------------------------------------- Menu manipulation --------------------------------
 // -------------------------------------------------------------------------------------------
@@ -289,6 +303,8 @@ void menuInit()
     gameMenuCurrent = NULL;
     appMenu = NULL;
     appMenuCurrent = NULL;
+    elmMenu = NULL;
+    elmMenuCurrent = NULL;
     menuInitMainMenu();
 
     menuSema.init_count = 1;
@@ -320,6 +336,7 @@ void menuEnd()
     submenuDestroy(&mainMenu);
     submenuDestroy(&gameMenu);
     submenuDestroy(&appMenu);
+    submenuDestroy(&elmMenu);
 
     if (itemConfig) {
         configFree(itemConfig);
@@ -1248,6 +1265,93 @@ void menuHandleInputAppMenu()
             menuRenameGame(&appMenu);
         } else if (menuID == 1) {
             menuDeleteGame(&appMenu);
+        }
+        // so the exit press wont propagate twice
+        readPads();
+    }
+
+    if (getKeyOn(KEY_START) || getKeyOn(gSelectButton == KEY_CIRCLE ? KEY_CROSS : KEY_CIRCLE)) {
+        guiSwitchScreen(GUI_SCREEN_MAIN);
+    }
+}
+
+void menuRenderElmMenu()
+{
+    guiDrawBGPlasma();
+
+    if (!elmMenu)
+        return;
+    if (!elmMenuCurrent)
+        elmMenuCurrent = elmMenu
+
+            submenu_list_t *it = elmMenu;
+    int count = 0;
+    int sitem = 0;
+
+    for (; it; count++, it = it->next) {
+        if (it = elmMenuCurrent)
+            sitem = count;
+    }
+
+    int spacing = 25;
+    int y = (gTheme->usedHeight >> 1) - (spacing * (count >> 1));
+    int cp = 0; // current position
+
+    // game title
+    fntRenderString(gTheme->fonts[0], 320, 20, ALIGN_CENTER, 0, 0, selected_item->item->current->item.text, gTheme->selTextColor);
+
+    // config source
+    char *cfgSource = gameConfigSource();
+    fntRenderString(gTheme->fonts[0], 320, 40, ALIGN_CENTER, 0, 0, cfgSource, gTheme->textColor);
+
+    // settings list
+    for (it = gameMenu; it; it = it->next, cp++) {
+        // render, advance
+        fntRenderString(gTheme->fonts[0], 320, y, ALIGN_CENTER, 0, 0, submenuItemGetText(&it->item), (cp == sitem) ? gTheme->selTextColor : gTheme->textColor);
+        y += spacing;
+        if (cp == (GAME_SAVE_CHANGES - 1) || cp == (GAME_REMOVE_CHANGES - 1))
+            y += spacing / 2;
+    }
+
+    // hints
+    guiDrawSubMenuHints();
+}
+
+void menuHandleInputElmMenu()
+{
+    if (!elmMenu)
+        return;
+
+    if (!elmMenuCurrent)
+        elmMenuCurrent = elmMenu;
+
+    if (getKey(KEY_UP)) {
+        sfxPlay(SFX_CURSOR);
+        if (elmMenuCurrent->prev)
+            elmMenuCurrent = elmMenuCurrent->prev;
+        else // rewind to the last item
+            while (elmMenuCurrent->next)
+                elmMenuCurrent = elmMenuCurrent->next;
+    }
+
+    if (getKey(KEY_DOWN)) {
+        sfxPlay(SFX_CURSOR);
+        if (elmMenuCurrent->next)
+            elmMenuCurrent = elmMenuCurrent->next;
+        else
+            elmMenuCurrent = elmMenu;
+    }
+
+    if (getKeyOn(gSelectButton)) {
+        // execute the item via looking at the id of it
+        int menuID = elmMenuCurrent->item.id;
+
+        sfxPlay(SFX_CONFIRM);
+
+        if (menuID == 0) {
+            menuRenameGame(&elmMenu);
+        } else if (menuID == 1) {
+            menuDeleteGame(&elmMenu);
         }
         // so the exit press wont propagate twice
         readPads();

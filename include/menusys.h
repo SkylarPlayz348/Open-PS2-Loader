@@ -86,6 +86,7 @@ void menuEnd();
 void menuReinitMainMenu(void);
 void menuInitGameMenu(void);
 void menuInitAppMenu(void);
+void menuInitElmMenu(void);
 
 void menuAppendItem(menu_item_t *item);
 
@@ -106,11 +107,13 @@ void menuRenderMenu();
 void menuRenderInfo();
 void menuRenderGameMenu();
 void menuRenderAppMenu();
+void menuRenderElmMenu();
 void menuHandleInputMain();
 void menuHandleInputMenu();
 void menuHandleInputInfo();
 void menuHandleInputGameMenu();
 void menuHandleInputAppMenu();
+void menuHandleInputElmMenu();
 
 // Sets the selected item if it is found in the menu list
 void menuSetSelectedItem(menu_item_t *item);
