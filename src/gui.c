@@ -577,6 +577,10 @@ void guiShowConfig()
     }
 }
 
+void guiShowCacheConfig() {
+
+}
+
 static int curTheme = -1;
 
 static int guiUIUpdater(int modified)

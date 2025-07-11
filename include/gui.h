@@ -127,6 +127,7 @@ void guiShowNetCompatUpdate(void);
 void guiShowNetCompatUpdateSingle(int id, item_list_t *support, config_set_t *configSet);
 void guiShowAbout();
 void guiShowConfig();
+void guiShowCacheConfig();
 void guiShowUIConfig();
 void guiShowAudioConfig();
 void guiShowControllerConfig();
