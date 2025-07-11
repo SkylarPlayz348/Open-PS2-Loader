@@ -149,9 +149,9 @@ void bdmInit(item_list_t *itemList)
 
 item_list_t *bdmGetObject(int initOnly)
 {
-    if (initOnly && !bdmGameList.enabled)
+    if (initOnly && !bdmDeviceList.enabled)
         return NULL;
-    return &bdmGameList;
+    return &bdmDeviceList;
 }
 
 static int bdmNeedsUpdate(item_list_t *itemList)
