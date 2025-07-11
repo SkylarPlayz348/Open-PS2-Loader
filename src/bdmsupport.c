@@ -151,7 +151,7 @@ item_list_t *bdmGetObject(int initOnly)
 {
     if (initOnly && !bdmDeviceList->enabled)
         return NULL;
-    return &bdmDeviceList;
+    return &bdmDeviceList[0];
 }
 
 static int bdmNeedsUpdate(item_list_t *itemList)
