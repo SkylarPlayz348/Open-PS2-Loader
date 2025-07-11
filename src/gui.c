@@ -574,7 +574,7 @@ static int guiCacheUpdater(int modified)
 {
     if (modified) {
     }
-    return 1;
+    return 0;
 }
 
 void guiShowCacheConfig()
