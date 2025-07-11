@@ -266,7 +266,7 @@ struct UIItem diaConfig[] = {
 
 // Cache Settings Menu
 struct UIItem diaCacheConfig[] = {
-    {UI_LABEL, 0, 1, 1, -1. 0, 0, {.label = {NULL, _STR_CACHE_SETTINGS}}},
+    {UI_LABEL, 0, 1, 1, -1, 0, 0, {.label = {NULL, _STR_CACHE_SETTINGS}}},
     {UI_SPLITTER},
 
     {UI_LABEL, 0, 1, 1, -1, -40, 0, {.label = {"BDM Cache", -1}}},
