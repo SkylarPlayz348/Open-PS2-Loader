@@ -77,9 +77,9 @@ static submenu_list_t *appMenu;
 static submenu_list_t *appMenuCurrent;
 
 static submenu_list_t *elmMenu;
-static subMenu_list_t *elmMenuCurrent
+static subMenu_list_t *elmMenuCurrent;
 
-    static s32 menuSemaId;
+static s32 menuSemaId;
 static s32 menuListSemaId = -1;
 static ee_sema_t menuSema;
 
