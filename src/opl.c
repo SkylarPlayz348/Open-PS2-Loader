@@ -406,6 +406,8 @@ void initSupport(item_list_t *itemList, int mode, int force_reinit)
         startMode = gHDDStartMode;
     else if (mode == APP_MODE)
         startMode = gAPPStartMode;
+    else if (mode == ELM_MODE)
+        startMode == gELMStartMode;
 
     if (startMode) {
         if (!mod->support) {
