@@ -1282,9 +1282,9 @@ void menuRenderElmMenu()
     if (!elmMenu)
         return;
     if (!elmMenuCurrent)
-        elmMenuCurrent = elmMenu
+        elmMenuCurrent = elmMenu;
 
-            submenu_list_t *it = elmMenu;
+    submenu_list_t *it = elmMenu;
     int count = 0;
     int sitem = 0;
 
