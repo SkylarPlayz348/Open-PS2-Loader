@@ -60,7 +60,7 @@ gui_strings:
   - label: EXIT
     string: Exit
   - label: SETTINGS
-    string: Settings
+    string: General Settings
   - label: MENU
     string: Menu
   - label: BDM_GAMES
