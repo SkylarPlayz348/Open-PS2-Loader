@@ -111,10 +111,10 @@ typedef struct theme
     theme_elems_t mainElems;
     theme_elems_t infoElems;
 
-    theme_elems_t elmMainElems;
-    theme_elems_t elmInfoElems;
+    theme_elems_t mainElemsELM;
+    theme_elems_t infoElemsELM;
     int inElmPage;
-    theme_element_t *elmItemsList;
+    theme_element_t *itemsListELM;
 
     theme_element_t *gamesItemsList;
 
