@@ -954,7 +954,6 @@ static void menuRenderElements(theme_element_t *elem)
 
     WaitSema(menuSemaId);
 
-    theme_element_t *elem = NULL;
     item_list_t *list = selected_item->item->userdata;
     if (list && gTheme->mainElemsELM.first && list->mode == ELM_MODE) {
         elem = gTheme->mainElemsELM.first;
