@@ -355,6 +355,9 @@ static void freeImageTexture(image_texture_t *texture)
 static image_texture_t *initImageTexture(const char *themePath, config_set_t *themeConfig, const char *name, const char *imgName, int isOverlay)
 {
     image_texture_t *texture = (image_texture_t *)malloc(sizeof(image_texture_t));
+    int length = strlen(name) + 1;
+    texture->name = (char *)malloc(length * sizeof(char));
+    memcpy(texture->name, name, length);
     texture->name = NULL;
 
     int texId = -1;
@@ -499,6 +502,9 @@ static mutable_image_t *initMutableImage(const char *themePath, config_set_t *th
     findDuplicate(theme->appsInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->elmMainElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
     findDuplicate(theme->elmInfoElems.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+
+    findDuplicate(theme->mainElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
+    findDuplicate(theme->infoElemsELM.first, cachePattern, defaultTexture, overlayTexture, mutableImage);
 
     if (cachePattern && !mutableImage->cache) {
         if (type == ELEM_TYPE_ATTRIBUTE_IMAGE)
@@ -1361,7 +1367,7 @@ static void thmLoad(const char *themePath)
     while (addGUIElem(themePath, themeConfig, newT, &newT->elmMainElems, NULL, path))
         snprintf(path, sizeof(path), "mainELM%d", i++);
 
-    //Special Info ELM page
+    // Special Info ELM page
     i = 1;
     snprintf(path, sizeof(path), "infoELM0");
     while (addGUIElem(themePath, themeConfig, newT, &newT->elmInfoElems, NULL, path))
