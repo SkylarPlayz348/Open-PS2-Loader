@@ -149,7 +149,7 @@ void bdmInit(item_list_t *itemList)
 
 item_list_t *bdmGetObject(int initOnly)
 {
-    if (initOnly && !bdmDeviceList.enabled)
+    if (initOnly && !bdmDeviceList->enabled)
         return NULL;
     return &bdmDeviceList;
 }
