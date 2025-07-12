@@ -706,5 +706,7 @@ gui_strings:
     string: "An error occurred while renaming the file."
   - label: PSX_DELETE_ERROR
     string: "An error occurred while deleting the file."
+  - label: PSX_LAUNCH_TEST
+    string: Debug: Game Lauched
   - label: CACHE_SETTINGS
     string: "Cache Settings"

@@ -506,7 +506,8 @@ static void elmRenameItem(item_list_t *itemList, int id, char *newName)
 
 static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet)
 {
-    ElmGame *cur = elmGetGameInfo(id);
+    guiMsgBox(_l(_STR_PSX_LAUNCH_TEST), 1, NULL);
+    /* ElmGame *cur = elmGetGameInfo(id);
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
 
@@ -600,7 +601,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
         char error[256];
         snprintf(error, sizeof(error), _l(_STR_POPSTARTER_NOT_FOUND), elmPathElf);
         guiMsgBox(error, 0, NULL);
-    }
+    } */
 }
 
 static config_set_t *elmGetConfig(item_list_t *itemList, int id)
@@ -614,11 +615,7 @@ static config_set_t *elmGetConfig(item_list_t *itemList, int id)
     // HDD
     if ((listSupport = hddGetObject(1))) {
         char path[256];
-#if OPL_IS_DEV_BUILD
-        snprintf(path, sizeof(path), "%sCFG-DEV/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#else
         snprintf(path, sizeof(path), "%sCFG/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#endif
         config = configAlloc(1, NULL, path);
         ret = configRead(config);
     }
@@ -628,12 +625,7 @@ static config_set_t *elmGetConfig(item_list_t *itemList, int id)
         char path[256];
         if (config != NULL)
             configFree(config);
-
-#if OPL_IS_DEV_BUILD
-        snprintf(path, sizeof(path), "%sCFG-DEV/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#else
         snprintf(path, sizeof(path), "%sCFG/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#endif
         config = configAlloc(1, NULL, path);
         ret = configRead(config);
     }
@@ -642,12 +634,7 @@ static config_set_t *elmGetConfig(item_list_t *itemList, int id)
         char path[256];
         if (config != NULL)
             configFree(config);
-
-#if OPL_IS_DEV_BUILD
-        snprintf(path, sizeof(path), "%sCFG-DEV/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#else
         snprintf(path, sizeof(path), "%sCFG/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
-#endif
         config = configAlloc(1, NULL, path);
         ret = configRead(config);
     }
