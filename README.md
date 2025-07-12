@@ -1,5 +1,7 @@
 # Open PS2 Loader
 
+[![CI-compile](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml/badge.svg)](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml)
+
 To read the original readme you can find it [here](./README-old.md)
 
 ---
