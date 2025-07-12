@@ -338,6 +338,8 @@ static void itemExecTriangle(struct menu_item *curMenu)
                 menuInitAppMenu();
                 guiSwitchScreen(GUI_SCREEN_APP_MENU);
             }
+            menuInitElmMenu();
+            guiSwitchScreen(GUI_SCREEN_ELM_MENU);
         }
     } else
         guiMsgBox("NULL Support object. Please report", 0, NULL);
