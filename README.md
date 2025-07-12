@@ -7,7 +7,7 @@ To read the original readme you can find it [here](./README-old.md)
 ---
 
 ## What is This?:
-This is a port of [Jay-Jay-OPL](https://github.com/Jay-Jay-OPL)'s tweaks to "modern OPL.
+This is a port of [Jay-Jay-OPL](https://github.com/Jay-Jay-OPL)'s tweaks to "Modern OPL"
 
 I will try my best to keep the official OPL code up to date where possible.
 
