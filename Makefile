@@ -25,7 +25,7 @@ EXTRAVERSION = Beta
 # You can also specify variables when executing make: "make RTL=1 IGS=1 PADEMU=1"
 
 # Check if EXTRA_FEATURES is set, default to 0
-EXTRA_FEATURES ?= 0
+EXTRA_FEATURES ?= 1
 
 # Set RTL and IGS based on EXTRA_FEATURES, but allow user overrides
 #Enables/disables Right-To-Left (RTL) language support
@@ -34,10 +34,10 @@ RTL ?= $(EXTRA_FEATURES)
 IGS ?= $(EXTRA_FEATURES)
 
 #Enables/disables pad emulator
-PADEMU ?= 1
+PADEMU ?= 0
 
 #Enables/disables building of an edition of OPL that will support the DTL-T10000 (SDK v2.3+)
-DTL_T10000 ?= 0
+DTL_T10000 ?= 1
 
 #Nor stripping neither compressing binary ELF after compiling.
 NOT_PACKED ?= 0
