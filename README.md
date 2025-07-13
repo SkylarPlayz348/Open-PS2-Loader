@@ -23,4 +23,4 @@ My fork of wLE is going to be added into the binary allowing for this tool to be
 ### POPSTARTER(Planned):
 I will also be adding POPSTARTER rev13 into the OPL to allow for a close to plug and play experience
 
-NOTE: Any files POPSTARTER needs are still required just POPSTARTER.elf
+NOTE: Any files POPSTARTER needs are still required just not POPSTARTER.elf
