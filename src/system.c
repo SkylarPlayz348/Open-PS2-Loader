@@ -1064,7 +1064,7 @@ int sysExecElfWithParam(char *path, char *param)
     FlushCache(0);
     FlushCache(2);
 
-    LOG("Booting PSX Game\n")
+    LOG("Booting PSX Game\n");
     ExecPS2((void *)eh->entry, 0, 2, elf_argv);
 
     return 0;
