@@ -506,8 +506,7 @@ static void elmRenameItem(item_list_t *itemList, int id, char *newName)
 
 static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet)
 {
-    guiMsgBox(_l(_STR_PSX_LAUNCH_TEST), 1, NULL);
-    /* ElmGame *cur = elmGetGameInfo(id);
+    ElmGame *cur = elmGetGameInfo(id);
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
 
@@ -530,7 +529,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 
     int fdElf = open(elmPathElf, O_RDONLY, 0666);
     if (fdElf >= 0) {
-        int fdVcd = 0;
+        /* int fdVcd = 0;
         // If we start with hdd0 don't check if the file exists
         if (!strncmp(cur->file, "hdd0", 4)) {
             fdVcd = 1;
@@ -596,12 +595,13 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
             guiMsgBox(error, 0, NULL);
-        }
+        } */
     } else {
         char error[256];
         snprintf(error, sizeof(error), _l(_STR_POPSTARTER_NOT_FOUND), elmPathElf);
         guiMsgBox(error, 0, NULL);
-    } */
+    }
+    guiMsgBox(_l(_STR_PSX_LAUNCH_TEST), 1, NULL);
 }
 
 static config_set_t *elmGetConfig(item_list_t *itemList, int id)
