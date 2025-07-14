@@ -1035,16 +1035,16 @@ int sysExecElfWithParam(char *path, char *param)
     // NB: ELFLDR.ELF is embedded
     boot_elf = (u8 *)&elfldr_elf;
     eh = (elf_header_t *)boot_elf;
-    LOG("eh->ident = %i", eh->ident);
+    LOG("eh set\n");
     if (_lw((u32)&eh->ident) != ELF_MAGIC) {
-        LOG("eh->ident != %i", ELF_MAGIC);
-        while (1)
-            ;
+        LOG("eh->ident not valid\n");
+        while (1);
     }
     eph = (elf_pheader_t *)(boot_elf + eh->phoff);
 
     // Scan through the ELF's program headers and copy them into RAM, then
     // zero out any non-loaded regions.
+    LOG("Loading ELF program headers to RAM\n")
     for (i = 0; i < eh->phnum; i++) {
         if (eph[i].type != ELF_PT_LOAD)
             continue;
