@@ -1024,6 +1024,7 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 
 int sysExecElfWithParam(char *path, char *param)
 {
+    LOG("Starting Booting ELM\n");
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
@@ -1063,6 +1064,7 @@ int sysExecElfWithParam(char *path, char *param)
     FlushCache(0);
     FlushCache(2);
 
+    LOG("Booting PSX Game\n")
     ExecPS2((void *)eh->entry, 0, 2, elf_argv);
 
     return 0;
