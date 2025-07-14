@@ -1024,7 +1024,7 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 
 int sysExecElfWithParam(char *path, char *param)
 {
-    LOG("Starting Booting ELM\n");
+    LOG("Start Booting ELM\n");
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
@@ -1035,10 +1035,12 @@ int sysExecElfWithParam(char *path, char *param)
     // NB: ELFLDR.ELF is embedded
     boot_elf = (u8 *)&elfldr_elf;
     eh = (elf_header_t *)boot_elf;
-    if (_lw((u32)&eh->ident) != ELF_MAGIC)
+    LOG("eh->ident = %i", eh->ident);
+    if (_lw((u32)&eh->ident) != ELF_MAGIC) {
+        LOG("eh->ident != %i", ELF_MAGIC);
         while (1)
             ;
-
+    }
     eph = (elf_pheader_t *)(boot_elf + eh->phoff);
 
     // Scan through the ELF's program headers and copy them into RAM, then
