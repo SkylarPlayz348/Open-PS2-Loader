@@ -46,7 +46,7 @@ NOT_PACKED ?= 0
 DEBUG ?= 1
 EESIO_DEBUG ?= 1
 INGAME_DEBUG ?= 1
-DECI2_DEBUG ?= 1
+DECI2_DEBUG ?= 0
 #How the TTY will reach developer: 'UDP', 'PPC_UART'.
 TTY_APPROACH ?= UDP
 
