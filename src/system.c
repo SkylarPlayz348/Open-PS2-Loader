@@ -1032,7 +1032,7 @@ int sysExecElfWithParam(char *path, char *param)
     char *elf_argv[2];
 
     // NB: ELFLDR.ELF is embedded
-    boot_elf = elfldr_elf;
+    boot_elf = (u8 *)&elfldr_elf;
     eh = (elf_header_t *)boot_elf;
     if (_lw((u32)&eh->ident) != ELF_MAGIC)
         while (1)
