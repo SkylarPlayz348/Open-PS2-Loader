@@ -595,8 +595,8 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
-            guiMsgBox(error, 0, NULL);
-        } */
+            guiMsgBox(error, 0, NULL); */
+        }
     } else {
         char error[256];
         snprintf(error, sizeof(error), _l(_STR_POPSTARTER_NOT_FOUND), elmPathElf);
