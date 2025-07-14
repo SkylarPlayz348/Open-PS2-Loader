@@ -572,7 +572,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
-            /* int mode = ELM_MODE;
+            int mode = ELM_MODE;
 
             // Figure out in what device the VCD is at. This is necessary to avoid the device to be unmounted.
             if (strncmp(cur->file, "mass", 4) == 0) {
@@ -591,11 +591,11 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            sysExecElfWithParam(memPath, params);
+            /* sysExecElfWithParam(memPath, params); */
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
-            guiMsgBox(error, 0, NULL); */
+            guiMsgBox(error, 0, NULL);
         }
     } else {
         char error[256];
