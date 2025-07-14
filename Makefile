@@ -37,15 +37,15 @@ IGS ?= $(EXTRA_FEATURES)
 PADEMU ?= 0
 
 #Enables/disables building of an edition of OPL that will support the DTL-T10000 (SDK v2.3+)
-DTL_T10000 ?= 1
+DTL_T10000 ?= 0
 
 #Nor stripping neither compressing binary ELF after compiling.
 NOT_PACKED ?= 0
 
 # ======== END OF CONFIGURABLE SECTION. DO NOT MODIFY VARIABLES AFTER THIS POINT!! ========
-DEBUG ?= 1
+DEBUG ?= 0
 EESIO_DEBUG ?= 0
-INGAME_DEBUG ?= 1
+INGAME_DEBUG ?= 0
 DECI2_DEBUG ?= 0
 #How the TTY will reach developer: 'UDP', 'PPC_UART'.
 TTY_APPROACH ?= UDP
