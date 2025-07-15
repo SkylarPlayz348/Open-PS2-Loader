@@ -33,6 +33,7 @@
 #include <libds34usb.h>
 #endif
 
+#include <sifman.h>
 #define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h> // fileXioInit, fileXioExit, fileXioDevctl
 
