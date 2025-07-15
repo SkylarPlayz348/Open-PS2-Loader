@@ -1064,7 +1064,7 @@ int sysExecElfWithParam(char *path, char *param)
     fileXioExit();
     LOG("SifExitRpc\n");
     SifExitRpc();
-    LOG("SifExitRpc Ran\n")
+    LOG("SifExitRpc Ran\n");
 
     elf_argv[0] = path;
     elf_argv[1] = param;
