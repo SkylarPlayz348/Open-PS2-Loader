@@ -1051,9 +1051,12 @@ int sysExecElfWithParam(char *path, char *param)
 
         pdata = (void *)(boot_elf + eph[i].offset);
         memcpy(eph[i].vaddr, pdata, eph[i].filesz);
+        LOG("EECORE PH COPY: %d 0x%08X 0x%08X 0x%08X\n", i, (u32)eph[i].vaddr, (u32)pdata, eph[i].filesz);
 
-        if (eph[i].memsz > eph[i].filesz)
+        if (eph[i].memsz > eph[i].filesz) {
+            LOG("EECORE PH CLEAR: %d 0x%08X 0x%08X\n", i, (u32)((u32)eph[i].vaddr + eph[i].filesz), eph[i].memsz - eph[i].filesz);
             memset(eph[i].vaddr + eph[i].filesz, 0, eph[i].memsz - eph[i].filesz);
+        }
     }
 
     // Let's go.
