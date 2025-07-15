@@ -1025,6 +1025,8 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 int sysExecElfWithParam(char *path, char *param)
 {
     LOG("Start Booting ELM\n");
+    if (!SifCheckInit())
+        LOG("SifCheckInit not inititialized");
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
@@ -1038,7 +1040,8 @@ int sysExecElfWithParam(char *path, char *param)
     LOG("eh set\n");
     if (_lw((u32)&eh->ident) != ELF_MAGIC) {
         LOG("eh->ident not valid\n");
-        while (1);
+        while (1)
+            ;
     }
     eph = (elf_pheader_t *)(boot_elf + eh->phoff);
 
