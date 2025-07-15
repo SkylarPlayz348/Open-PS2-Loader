@@ -1059,15 +1059,22 @@ int sysExecElfWithParam(char *path, char *param)
         }
     }
 
+
+    elf_argv[0] = path;
+    elf_argv[1] = param;
+
+    LOG("Starting ee_core with following argv arguments:\n");
+    for (i = 0; i < 2; i++) {
+        LOG("[%d] %s\n", i, elf_argv[i]);
+    }
+
+    LOG("Leaving OPL GUI, starting eecore = 0x%08X \n", (u32)eh->entry);
     // Let's go.
     LOG("fileXioExit\n");
     fileXioExit();
     LOG("SifExitRpc\n");
-    // SifExitRpc();
+    SifExitRpc();
     LOG("SifExitRpc Ran\n");
-
-    elf_argv[0] = path;
-    elf_argv[1] = param;
 
     LOG("FlushCache(0)\n");
     FlushCache(0);
