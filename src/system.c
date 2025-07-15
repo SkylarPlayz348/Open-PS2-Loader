@@ -1044,7 +1044,7 @@ int sysExecElfWithParam(char *path, char *param)
 
     // Scan through the ELF's program headers and copy them into RAM, then
     // zero out any non-loaded regions.
-    LOG("Loading ELF program headers to RAM\n")
+    LOG("Loading ELF program headers to RAM\n");
     for (i = 0; i < eh->phnum; i++) {
         if (eph[i].type != ELF_PT_LOAD)
             continue;
