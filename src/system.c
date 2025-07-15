@@ -1060,13 +1060,17 @@ int sysExecElfWithParam(char *path, char *param)
     }
 
     // Let's go.
+    LOG("fileXioExit\n");
     fileXioExit();
+    LOG("SifExitRpc\n");
     SifExitRpc();
 
     elf_argv[0] = path;
     elf_argv[1] = param;
 
+    LOG("FlushCache(0)\n");
     FlushCache(0);
+    LOG("FlushCache(2)\n");
     FlushCache(2);
 
     LOG("Booting PSX Game\n");
