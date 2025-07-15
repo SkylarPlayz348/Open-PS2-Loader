@@ -33,7 +33,6 @@
 #include <libds34usb.h>
 #endif
 
-#include <sifrpc.h>
 #define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h> // fileXioInit, fileXioExit, fileXioDevctl
 
@@ -1026,8 +1025,6 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 int sysExecElfWithParam(char *path, char *param)
 {
     LOG("Start Booting ELM\n");
-    if (!sceSifCheckInit())
-        LOG("SifCheckInit not inititialized");
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
@@ -1045,6 +1042,9 @@ int sysExecElfWithParam(char *path, char *param)
             ;
     }
     eph = (elf_pheader_t *)(boot_elf + eh->phoff);
+
+    FlushCache(0);
+    FlushCache(2);
 
     // Scan through the ELF's program headers and copy them into RAM, then
     // zero out any non-loaded regions.
