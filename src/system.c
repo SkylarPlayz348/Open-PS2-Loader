@@ -1025,6 +1025,7 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 int sysExecElfWithParam(char *path, char *param)
 {
     LOG("Start Booting ELM\n");
+    SifInitRpc(0);
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
