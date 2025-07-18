@@ -19,8 +19,6 @@
 static int elmForceUpdate = 1;
 static int elmItemCount = 0;
 
-extern elfldr_elf;
-
 // forward declaration
 static item_list_t elmItemList;
 
