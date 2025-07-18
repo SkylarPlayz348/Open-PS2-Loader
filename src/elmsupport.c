@@ -510,7 +510,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
     ElmGame *cur = elmGetGameInfo(id);
 
     int argc;
-    char *argv[1];
+    char *argv[2];
 
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
@@ -577,7 +577,10 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
-            sprintf(argv[argc], "%s%s%s.VCD", cur->pathFolder, elmElfPrefix, fileOnly);
+            argv[argc] = memPath;
+            argc++;
+            argv[argc] = params;
+            argc++;
 
             int mode = ELM_MODE;
 
@@ -598,7 +601,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition(memPath, "", argc, argv);
+            LoadELFFromFileWithPartition(elmPathElf, "", argc, argv);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
