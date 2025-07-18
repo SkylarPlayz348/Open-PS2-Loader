@@ -510,7 +510,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
     ElmGame *cur = elmGetGameInfo(id);
 
     int argc;
-    char *argv[2];
+    char *argv[1];
 
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
@@ -560,9 +560,6 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 
             char memPath[256];
             sprintf(memPath, "mem:%u", (unsigned int)buffer);
-
-            argv[argc] = memPath;
-            argc++;
 
             char *fileOnly = strrchr(cur->file, '/');
             if (!fileOnly)
