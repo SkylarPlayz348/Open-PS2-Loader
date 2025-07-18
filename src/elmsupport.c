@@ -357,7 +357,7 @@ static int elmUpdateItemList(item_list_t *itemList)
     }
 
 
-    /* if ((tmp = bdmGetObject(1))) {
+    if ((tmp = bdmGetObject(1))) {
         char bdmPathBase[7]; // massX:
         char bdmPathTest[40];
         int bdmFd, i;
@@ -374,7 +374,7 @@ static int elmUpdateItemList(item_list_t *itemList)
                 break;
             }
         }
-    } */
+    }
 
     // Check for duplicates
     if (elmGameList) {
@@ -598,7 +598,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition(elmPathElf, "", argc, argv);
+            LoadELFFromFileWithPartition(memPath, "", argc, argv);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
@@ -638,14 +638,14 @@ static config_set_t *elmGetConfig(item_list_t *itemList, int id)
         ret = configRead(config);
     }
 
-    /* if (ret == 0 && (listSupport = bdmGetObject(1))) {
+    if (ret == 0 && (listSupport = bdmGetObject(1))) {
         char path[256];
         if (config != NULL)
             configFree(config);
         snprintf(path, sizeof(path), "%sCFG/%s.cfg", listSupport->itemGetPrefix(listSupport), cur->ID);
         config = configAlloc(1, NULL, path);
         ret = configRead(config);
-    } */
+    }
 
     if (ret == 0) { // No config found on previous devices, create one.
         if (config != NULL)
@@ -677,8 +677,8 @@ static int elmGetImage(item_list_t *itemList, char *folder, int isRelative, char
             return 0;
     }
 
-    /* if ((listSupport = bdmGetObject(1)))
-        return listSupport->itemGetImage(itemList, folder, isRelative, value, suffix, resultTex, psm); */
+    if ((listSupport = bdmGetObject(1)))
+        return listSupport->itemGetImage(itemList, folder, isRelative, value, suffix, resultTex, psm);
 
     return -1;
 }
