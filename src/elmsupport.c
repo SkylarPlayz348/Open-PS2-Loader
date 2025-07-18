@@ -587,11 +587,11 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
                 // Failed to detect the device...
                 LOG("ELMSUPPORT warning: cannot find mode for path: %s\n", cur->file);
             } else {
-                LOG("ELMSUPPORT Mode detected as: ", mode);
+                LOG("ELMSUPPORT Mode detected as: ", mode, "\n");
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            sysExecElfWithParam(memPath, params);
+            LoadELFFromFileWithPartition(memPath, "", 2, params)
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
