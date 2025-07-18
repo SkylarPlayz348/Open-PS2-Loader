@@ -1,7 +1,7 @@
 VERSION = 0
 SUBVERSION = 0
 PATCHLEVEL = 0
-EXTRAVERSION = Beta
+# EXTRAVERSION =
 
 # How to DEBUG?
 # Simply type "make <debug mode>" to build OPL with the necessary debugging functionality.
@@ -51,9 +51,9 @@ DECI2_DEBUG ?= 0
 TTY_APPROACH ?= UDP
 
 # ======== DO NOT MODIFY VALUES AFTER THIS POINT! UNLESS YOU KNOW WHAT YOU ARE DOING ========
-REVISION = $(shell expr $(shell git rev-list --count HEAD) + 2)
+# REVISION = $(shell expr $(shell git rev-list --count HEAD) + 2)
 
-GIT_HASH = $(shell git rev-parse --short=7 HEAD 2>/dev/null)
+# GIT_HASH = $(shell git rev-parse --short=7 HEAD 2>/dev/null)
 ifeq ($(shell git diff --quiet; echo $$?),1)
   DIRTY = -dirty
 endif

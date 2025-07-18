@@ -509,8 +509,8 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 {
     ElmGame *cur = elmGetGameInfo(id);
 
-    int argc;
-    char *argv[2];
+    int argc = 0;
+    char *argv[2] = NULL;
 
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
@@ -577,10 +577,8 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
-            argv[argc] = memPath;
-            argc++;
             argv[argc] = params;
-            argc++;
+            argv[argc++] = NULL;
 
             int mode = ELM_MODE;
 
@@ -597,7 +595,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
                 // Failed to detect the device...
                 LOG("ELMSUPPORT warning: cannot find mode for path: %s\n", cur->file);
             } else {
-                LOG("ELMSUPPORT Mode detected as: ", mode, "\n");
+                LOG("ELMSUPPORT Mode detected as: %s", mode);
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
