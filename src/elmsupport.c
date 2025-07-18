@@ -510,7 +510,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
     ElmGame *cur = elmGetGameInfo(id);
 
     int argc = 0;
-    char *argv[2] = NULL;
+    char *argv[2];
 
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
