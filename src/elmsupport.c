@@ -577,9 +577,9 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
-            sprintf(argv[argc], "%s%s%s.VCD", cur->pathFolder, elmElfPrefix, fileOnly)
+            sprintf(argv[argc], "%s%s%s.VCD", cur->pathFolder, elmElfPrefix, fileOnly);
 
-                int mode = ELM_MODE;
+            int mode = ELM_MODE;
 
             // Figure out in what device the VCD is at. This is necessary to avoid the device to be unmounted.
             if (strncmp(cur->file, "mass", 4) == 0) {
