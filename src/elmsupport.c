@@ -508,6 +508,10 @@ static void elmRenameItem(item_list_t *itemList, int id, char *newName)
 static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet)
 {
     ElmGame *cur = elmGetGameInfo(id);
+
+    int argc;
+    char *argv[];
+
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
 
@@ -557,6 +561,9 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             char memPath[256];
             sprintf(memPath, "mem:%u", (unsigned int)buffer);
 
+            argv[argc] = memPath;
+            argc++;
+
             char *fileOnly = strrchr(cur->file, '/');
             if (!fileOnly)
                 fileOnly = strrchr(cur->file, ':');
@@ -568,6 +575,9 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("fileOnly= %s\n", fileOnly);
             char params[256];
             sprintf(params, "%s%s%s.ELF", cur->pathFolder, elmElfPrefix, fileOnly);
+
+            argv[argc] = params;
+            argc++;
 
             LOG("memPath = %s\n", memPath);
             LOG("params = %s\n", params);
@@ -592,7 +602,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition(memPath, "", 2, params);
+            LoadELFFromFileWithPartition(elmPathElf, "", argc, argv);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
