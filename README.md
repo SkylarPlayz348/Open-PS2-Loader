@@ -12,8 +12,7 @@ This is a port of [Jay-Jay-OPL](https://github.com/Jay-Jay-OPL)'s tweaks to "Mod
 I will try my best to keep the official OPL code up to date where possible.
 
 ## Current Issues:
-1. The menu is available and games load in the menu as well as cover art when provided but the games don't boot.
-2. Looks at all devices regardless if enabled(possible feature?)
+1. Loads `POPSTARTER.ELF` but games don't boot so it runs whatever your `BOOT.ELF` is
 
 ## Other Tweaks:
 Yes I am adding my own tweaks

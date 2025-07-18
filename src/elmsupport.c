@@ -517,7 +517,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 
     // The prefix of the ELF file. Eg: XX./SB./<none>
     char elmElfPrefix[4];
-
+    LOG("cur->file: %s\n", cur->file);
     // Figure out the path to POPSTARTER and the prefix
     if (!strncmp(cur->file, "hdd0", 4)) {
         strcpy(elmPathElf, elmPathElfHdd);
