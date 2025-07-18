@@ -12,7 +12,8 @@ This is a port of [Jay-Jay-OPL](https://github.com/Jay-Jay-OPL)'s tweaks to "Mod
 I will try my best to keep the official OPL code up to date where possible.
 
 ## Current Issues:
-1. The menu is available and games load in the menu as well as cover art when provided but the games don't boot. I have taken out(aka commented out) the boot logic to prevent a soft lock.
+1. The menu is available and games load in the menu as well as cover art when provided but the games don't boot.
+2. Looks at all devices regardless if enabled(possible feature?)
 
 ## Other Tweaks:
 Yes I am adding my own tweaks
