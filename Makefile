@@ -53,7 +53,7 @@ TTY_APPROACH ?= UDP
 # ======== DO NOT MODIFY VALUES AFTER THIS POINT! UNLESS YOU KNOW WHAT YOU ARE DOING ========
 # REVISION = $(shell expr $(shell git rev-list --count HEAD) + 2)
 
-# GIT_HASH = $(shell git rev-parse --short=7 HEAD 2>/dev/null)
+GIT_HASH = $(shell git rev-parse --short=7 HEAD 2>/dev/null)
 ifeq ($(shell git diff --quiet; echo $$?),1)
   DIRTY = -dirty
 endif
@@ -62,7 +62,7 @@ ifneq ($(shell test -d .git; echo $$?),0)
 endif
 
 GIT_TAG = $(shell git describe --exact-match --tags 2>/dev/null)
-OPL_VERSION = v$(VERSION).$(SUBVERSION).$(PATCHLEVEL)$(if $(EXTRAVERSION),-$(EXTRAVERSION))-$(REVISION)$(if $(GIT_HASH),-$(GIT_HASH))$(if $(DIRTY),$(DIRTY))$(if $(LOCALVERSION),-$(LOCALVERSION))
+OPL_VERSION = v$(VERSION).$(SUBVERSION).$(PATCHLEVEL)$(if $(EXTRAVERSION),-$(EXTRAVERSION))$(REVISION)$(if $(GIT_HASH),-$(GIT_HASH))$(if $(DIRTY),$(DIRTY))$(if $(LOCALVERSION),-$(LOCALVERSION))
 
 ifneq ($(GIT_TAG),)
 ifneq ($(GIT_TAG),latest)

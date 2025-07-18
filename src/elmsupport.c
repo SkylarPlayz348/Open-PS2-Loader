@@ -19,6 +19,8 @@
 static int elmForceUpdate = 1;
 static int elmItemCount = 0;
 
+extern elfldr_elf;
+
 // forward declaration
 static item_list_t elmItemList;
 
@@ -577,8 +579,10 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
+            argv[argc] = memPath;
+            argc++;
             argv[argc] = params;
-            argv[argc++] = NULL;
+            argc++;
 
             int mode = ELM_MODE;
 
@@ -595,11 +599,11 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
                 // Failed to detect the device...
                 LOG("ELMSUPPORT warning: cannot find mode for path: %s\n", cur->file);
             } else {
-                LOG("ELMSUPPORT Mode detected as: %s", mode);
+                LOG("ELMSUPPORT Mode detected as:\n", mode);
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition(elmPathElf, "", argc, argv);
+            LoadELFFromFileWithPartition(elfldr_elf, "", argc, argv);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
