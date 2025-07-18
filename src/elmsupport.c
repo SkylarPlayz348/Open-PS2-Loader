@@ -11,6 +11,7 @@
 #include "include/hddsupport.h"
 #include "include/supportbase.h"
 
+#include <elf-loader.h>
 #define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h> // fileXioMount, fileXioUmount
 #include <io_common.h>   // FIO_MT_RDWR
