@@ -1076,11 +1076,11 @@ int sysExecElfWithParam(char *path, char *param)
     // Let's go.
     LOG("fileXioExit\n");
     fileXioExit();
-    LOG("SifInitRpc\n");
-    SifInitRpc(0);
-    LOG("SifExitRpc\n");
-    SifExitRpc();
-    LOG("SifExitRpc Ran\n");
+    /*     LOG("SifInitRpc\n");
+        SifInitRpc(0);
+        LOG("SifExitRpc\n");
+        SifExitRpc();
+        LOG("SifExitRpc Ran\n"); */
 
     LOG("FlushCache(0)\n");
     FlushCache(0);
