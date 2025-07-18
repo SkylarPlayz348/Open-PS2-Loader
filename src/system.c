@@ -94,6 +94,8 @@ typedef struct
     u32 align;
 } elf_pheader_t;
 
+extern int sceSifCheckInit(void);
+
 void guiWarning(const char *text, int count);
 void guiEnd();
 void menuEnd();
@@ -1025,7 +1027,8 @@ void sysLaunchLoaderElf(const char *filename, const char *mode_str, int size_cdv
 int sysExecElfWithParam(char *path, char *param)
 {
     LOG("Start Booting ELM\n");
-    SifInitRpc(0);
+    if (!sceSifCheckInit())
+        LOG("Sif not Init");
     u8 *boot_elf = NULL;
     elf_header_t *eh;
     elf_pheader_t *eph;
