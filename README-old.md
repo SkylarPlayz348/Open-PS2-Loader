@@ -6,9 +6,6 @@ Review the LICENSE file for further details.
 
 [![CI](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml/badge.svg?branch=master)](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml)
 
-
-### I am porting features from Jay-Jays OPL to OPL 1.2.0 Beta and because of some underlying changes I am resetting the version counter to `0.0.0` with the first release being `0.0.1`
-
 ## Introduction
 
 Open PS2 Loader (OPL) is a 100% Open source game and application loader for

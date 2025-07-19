@@ -1,5 +1,7 @@
 # Open PS2 Loader
 
+![Game-Compatibility](https://img.shields.io/badge/ps2%20and%20ps1%20games-007acc?style=for-the-badge&logo=playstation&logoColor=white&logoSize=auto&label=Supports)
+
 [![CI-compile](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml/badge.svg)](https://github.com/SkylarPlayz348/Open-PS2-Loader/actions/workflows/compilation.yml)
 
 To read the original readme you can find it [here](./README-old.md)

@@ -19,6 +19,9 @@
 static int elmForceUpdate = 1;
 static int elmItemCount = 0;
 
+extern void *elfldr_elf;
+extern int size_elfldr_elf;
+
 // forward declaration
 static item_list_t elmItemList;
 
@@ -601,7 +604,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition(elmPathElf, "", argc, argv);
+            LoadELFFromFileWithPartition(elfldr_elf, "", argc, argv);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
