@@ -44,6 +44,14 @@ jobs:
             LICENSE
             README.md
 
+      - name: Upload elfldr.elf
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: elfldr
+          path: |
+            elfldr/elfldr.elf
+
   build-variants:
     strategy:
       fail-fast: false
