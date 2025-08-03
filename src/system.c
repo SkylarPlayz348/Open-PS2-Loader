@@ -1059,7 +1059,7 @@ int sysExecElfWithParam(char *path, char *param)
 
     elf_argv[0] = path;
     elf_argv[1] = param;
-
+    LOG("FlushCache\n");
     FlushCache(0);
     FlushCache(2);
 
