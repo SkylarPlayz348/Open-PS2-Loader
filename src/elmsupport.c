@@ -511,16 +511,12 @@ static void elmRenameItem(item_list_t *itemList, int id, char *newName)
 static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet)
 {
     ElmGame *cur = elmGetGameInfo(id);
-
-    int argc = 0;
-    char *argv[2];
-
     // The path to POPSTARTER.ELF
     char elmPathElf[256];
 
     // The prefix of the ELF file. Eg: XX./SB./<none>
     char elmElfPrefix[4];
-    LOG("cur->file: %s\n", cur->file);
+
     // Figure out the path to POPSTARTER and the prefix
     if (!strncmp(cur->file, "hdd0", 4)) {
         strcpy(elmPathElf, elmPathElfHdd);
@@ -537,7 +533,6 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 
     int fdElf = open(elmPathElf, O_RDONLY, 0666);
     if (fdElf >= 0) {
-
         int fdVcd = 0;
         // If we start with hdd0 don't check if the file exists
         if (!strncmp(cur->file, "hdd0", 4)) {
@@ -580,11 +575,6 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             LOG("params = %s\n", params);
             LOG("VCD Path= %s\n", cur->file);
 
-            argv[argc] = memPath;
-            argc++;
-            argv[argc] = params;
-            argc++;
-
             int mode = ELM_MODE;
 
             // Figure out in what device the VCD is at. This is necessary to avoid the device to be unmounted.
@@ -600,11 +590,11 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
                 // Failed to detect the device...
                 LOG("ELMSUPPORT warning: cannot find mode for path: %s\n", cur->file);
             } else {
-                LOG("ELMSUPPORT Mode detected as:\n", mode);
+                LOG("ELMSUPPORT Mode detected as: ", mode);
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
-            LoadELFFromFileWithPartition("mass://OPL/elfldr.elf", "", argc, argv);
+            sysExecElfWithParam(memPath, params);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
@@ -615,7 +605,6 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
         snprintf(error, sizeof(error), _l(_STR_POPSTARTER_NOT_FOUND), elmPathElf);
         guiMsgBox(error, 0, NULL);
     }
-    guiMsgBox(_l(_STR_PSX_LAUNCH_TEST), 1, NULL);
 }
 
 static config_set_t *elmGetConfig(item_list_t *itemList, int id)
