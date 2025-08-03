@@ -1053,13 +1053,14 @@ int sysExecElfWithParam(char *path, char *param)
             memset(eph[i].vaddr + eph[i].filesz, 0, eph[i].memsz - eph[i].filesz);
     }
 
+    LOG("SifExitRPC");
     // Let's go.
     fileXioExit();
     SifExitRpc();
 
     elf_argv[0] = path;
     elf_argv[1] = param;
-    LOG("FlushCache\n");
+
     FlushCache(0);
     FlushCache(2);
 
