@@ -1028,20 +1028,20 @@ int sysExecElfWithParam(char *path, char *param)
     elf_header_t *eh;
     elf_pheader_t *eph;
     void *pdata;
-    int i;
     char *elf_argv[2];
 
     LOG("ELFLDR.ELF is embedded");
     boot_elf = (u8 *)elfldr_elf;
     eh = (elf_header_t *)boot_elf;
-    if (_lw((u32)&eh->ident) != ELF_MAGIC)
-        while (1)
-            ;
+    if (_lw((u32)&eh->ident) != ELF_MAGIC) {
+        LOG("ELF MAGIC Error\n")
+        return -1
+    }
 
     eph = (elf_pheader_t *)(boot_elf + eh->phoff);
 
     LOG("Scan through the ELF's program headers and copy them into RAM, then zero out any non-loaded regions.");
-    for (i = 0; i < eh->phnum; i++) {
+    for (int i = 0; i < eh->phnum; i++) {
         if (eph[i].type != ELF_PT_LOAD)
             continue;
 
@@ -1054,7 +1054,7 @@ int sysExecElfWithParam(char *path, char *param)
 
     LOG("SifExitRPC");
     // Let's go.
-    fileXioExit();
+    // fileXioExit();
     SifExitRpc();
 
     elf_argv[0] = path;
