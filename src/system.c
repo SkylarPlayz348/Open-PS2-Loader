@@ -36,6 +36,8 @@
 #define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h> // fileXioInit, fileXioExit, fileXioDevctl
 
+#include <elf-loader.h>
+
 typedef struct
 {
     char VMC_filename[1024];
