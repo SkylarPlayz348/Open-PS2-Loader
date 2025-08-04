@@ -11,6 +11,7 @@
 #include "include/hddsupport.h"
 #include "include/supportbase.h"
 
+#include <sbv_patches.h>
 #include <elf-loader.h>
 #define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h> // fileXioMount, fileXioUmount
@@ -600,7 +601,8 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             argv[1] = params;
 
             LOG("sysExecElfWithParam");
-            LoadELFFromFile(memPath, 2, );
+            sbv_patch_disable_prefix_check();
+            LoadELFFromFile(memPath, 2, argv);
             // sysExecElfWithParam(memPath, params);
             //  LoadELFFromFileWithPartition("rom0:OSDSYS", NULL, 0, NULL);
         } else {
