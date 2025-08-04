@@ -602,7 +602,7 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
 
             LOG("sysExecElfWithParam");
             sbv_patch_disable_prefix_check();
-            LoadELFFromFile(memPath, 2, argv);
+            LoadELFFromFile(elmPathElf, 2, argv);
             // sysExecElfWithParam(memPath, params);
             //  LoadELFFromFileWithPartition("rom0:OSDSYS", NULL, 0, NULL);
         } else {
