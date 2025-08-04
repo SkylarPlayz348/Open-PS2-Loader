@@ -1034,7 +1034,7 @@ int sysExecElfWithParam(char *path, char *param)
     boot_elf = (u8 *)elfldr_elf;
     eh = (elf_header_t *)boot_elf;
     if (_lw((u32)&eh->ident) != ELF_MAGIC) {
-        LOG("ELF MAGIC Error\n")
+        LOG("ELF MAGIC Error\n");
         return -1;
     }
 
