@@ -594,9 +594,15 @@ static void elmLaunchItem(item_list_t *itemList, int id, config_set_t *configSet
             }
 
             deinit(UNMOUNT_EXCEPTION, mode); // CAREFUL: deinit will call elmCleanUp, so configElm/cur will be freed
+            char *argv[2];
+
+            argv[0] = memPath;
+            argv[1] = params;
+
             LOG("sysExecElfWithParam");
-            sysExecElfWithParam(memPath, params);
-            // LoadELFFromFileWithPartition("rom0:OSDSYS", NULL, 0, NULL);
+            LoadELFFromFile(memPath, 2, );
+            // sysExecElfWithParam(memPath, params);
+            //  LoadELFFromFileWithPartition("rom0:OSDSYS", NULL, 0, NULL);
         } else {
             char error[256];
             snprintf(error, sizeof(error), _l(_STR_VCD_NOT_FOUND), cur->file);
