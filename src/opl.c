@@ -410,6 +410,12 @@ void initSupport(item_list_t *itemList, int mode, int force_reinit)
         startMode = gAPPStartMode;
     else if (mode == ELM_MODE)
         startMode = gELMStartMode;
+    else if (mode == ELM_MODE && mode == APP_MODE)
+    {
+        char *model;
+	    model = (char *)malloc(sizeof(char)*17);
+	    strcpy(model, "SPCH-35001");
+    }
 
     if (startMode) {
         if (!mod->support) {
